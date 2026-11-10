@@ -1,0 +1,1798 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ravan Ibrahimli — Portfolio</title>
+<meta name="description" content="Portfolio: software, hardware and games.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0b0b0a;
+    --bg-2: #111110;
+    --line: #262623;
+    --line-hi: #4a4a44;
+    --text: #ecebe6;
+    --muted: #8d8c85;
+    --accent: #ff6b35;          /* the only accent color — change it here */
+
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --gutter: clamp(20px, 5vw, 56px);
+    --maxw: 1120px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+
+  .mono { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+
+  /* ---------- top bar ---------- */
+  .top { border-bottom: 1px solid var(--line); }
+  .top .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+  .top nav { display: flex; gap: 28px; }
+  .top nav a { color: var(--muted); transition: color .15s; }
+  .top nav a:hover { color: var(--text); }
+
+  /* ---------- hero ---------- */
+  .hero { padding: clamp(64px, 12vw, 144px) 0 clamp(56px, 9vw, 104px); }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(56px, 11vw, 148px);
+    line-height: .92;
+    letter-spacing: -.02em;
+  }
+  .hero h1 em { font-style: italic; color: var(--muted); }
+  .hero .bio {
+    margin-top: clamp(28px, 4vw, 48px);
+    max-width: 34ch;
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.35;
+    letter-spacing: -.01em;
+  }
+  .meta {
+    margin-top: clamp(40px, 6vw, 72px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    border-top: 1px solid var(--line);
+  }
+  .meta > div { padding: 18px 24px 18px 0; }
+  .meta dt { margin-bottom: 6px; }
+  .meta dd { font-size: 16px; }
+  .dot {
+    display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); margin-right: 8px; vertical-align: 1px;
+  }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px;
+    border: 1px solid var(--line-hi);
+    font-size: 14px; font-weight: 500;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .btn .arr { font-family: var(--mono); font-size: 12px; transition: transform .15s; }
+  .btn:hover .arr { transform: translate(2px, -2px); }
+  .btn.sm { padding: 6px 12px; font-size: 13px; }
+
+  /* ---------- sections ---------- */
+  section { padding: clamp(56px, 8vw, 104px) 0; border-top: 1px solid var(--line); }
+  .sec-head {
+    display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap;
+    margin-bottom: clamp(28px, 4vw, 48px);
+  }
+  .sec-head h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(36px, 5vw, 60px); line-height: 1; letter-spacing: -.015em;
+  }
+  .sec-head h2 sup { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0; margin-left: 8px; vertical-align: top; position: relative; top: .5em; }
+
+  /* filters */
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filters button {
+    font: inherit; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
+    background: none; color: var(--muted);
+    border: 1px solid var(--line); padding: 7px 12px; cursor: pointer;
+    transition: color .15s, border-color .15s;
+  }
+  .filters button:hover { color: var(--text); border-color: var(--line-hi); }
+  .filters button[aria-pressed="true"] { color: var(--bg); background: var(--text); border-color: var(--text); }
+
+  /* ---------- project cards ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .card {
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    transition: background .2s;
+  }
+  .card:hover { background: var(--bg-2); }
+  .card.wide { grid-column: 1 / -1; }
+  .card[hidden] { display: none; }
+
+  .shot {
+    position: relative; aspect-ratio: 16 / 9; overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+  .card.wide .shot { aspect-ratio: 21 / 9; }
+  .shot img, .shot video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shot.gallery > img { object-fit: contain; }
+  .shot.gallery > img, .thumb img { image-rendering: pixelated; }
+  .card.wide .shot.gallery { aspect-ratio: 16 / 9; max-height: 460px; }
+  .thumbs { position: absolute; left: 12px; bottom: 12px; display: flex; gap: 6px; }
+  .thumb {
+    width: 76px; aspect-ratio: 16 / 9; padding: 0; cursor: pointer;
+    background: var(--bg); border: 1px solid var(--line-hi); opacity: .7;
+    transition: opacity .15s, border-color .15s;
+  }
+  .thumb:hover { opacity: 1; }
+  .thumb.on { opacity: 1; border-color: var(--accent); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumb img.broken { visibility: hidden; }
+  /* when no image could be loaded: a tidy placeholder instead of broken-image icons */
+  .shot.gallery.broken {
+    display: grid; place-items: center;
+    background: repeating-linear-gradient(135deg, transparent 0 11px, var(--line) 11px 12px), var(--bg-2);
+  }
+  .shot.gallery.broken > img, .shot.gallery.broken .thumbs { display: none; }
+  .shot.gallery.broken::after {
+    content: "screenshots could not be loaded · see the itch.io page";
+    font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted);
+    background: var(--bg); padding: 6px 12px; border: 1px solid var(--line); text-align: center; max-width: 80%;
+  }
+  .shot.empty {
+    display: grid; place-items: center;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 11px, var(--line) 11px 12px),
+      var(--bg-2);
+  }
+  .shot.empty span { background: var(--bg); padding: 4px 10px; border: 1px solid var(--line); }
+
+  .body { padding: 24px 24px 26px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+  .row { display: flex; justify-content: space-between; gap: 12px; }
+  .card h3 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 32px; line-height: 1.05; letter-spacing: -.01em;
+  }
+  .card p { color: #b6b5ad; font-size: 16px; max-width: 52ch; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 4px; }
+  .tags li {
+    list-style: none; font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+    border: 1px solid var(--line); padding: 3px 8px;
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .status-tag { color: var(--accent); }
+
+  /* ---------- buttons as <button> ---------- */
+  [hidden] { display: none !important; }
+  button.btn { background: none; color: inherit; font-family: var(--sans); cursor: pointer; }
+  button.btn:hover { background: var(--text); color: var(--bg); }
+  button.btn:disabled { opacity: .35; pointer-events: none; }
+  .btn.pri { border-color: var(--accent); color: var(--accent); }
+  button.btn.pri:hover { background: var(--accent); border-color: var(--accent); color: #000; }
+
+  /* ---------- embedded tool ---------- */
+  .card:has(.embed):hover { background: var(--bg); }
+  .embed { margin-top: 6px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .embed + .links { margin-top: 14px; }
+  .tool { display: flex; flex-direction: column; gap: 10px; }
+  .tool-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .tool textarea {
+    width: 100%; min-height: 92px; resize: vertical;
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--line-hi); border-radius: 0; padding: 12px;
+    font: 13px/1.5 var(--mono);
+  }
+  .tool textarea::placeholder { color: var(--muted); }
+  .tool-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .tool-row .sp { flex: 1; }
+  .tool-row.opts { gap: 22px; color: var(--muted); font-size: 14px; }
+  .tool label { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+  .tool input[type=checkbox] { accent-color: var(--accent); }
+  .toast { color: var(--accent); min-height: 1em; }
+  .out { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--line); padding: 14px; }
+  .out textarea { min-height: 72px; }
+  .res-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    border-top: 1px solid var(--line); border-left: 1px solid var(--line);
+  }
+  .res { min-width: 0; display: flex; flex-direction: column; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .res-h { display: flex; align-items: center; gap: 10px; padding: 7px 12px; border-bottom: 1px solid var(--line); }
+  .res-h .sp { flex: 1; }
+  .res-h .btn { padding: 2px 9px; font-size: 12px; }
+  .res-list { list-style: none; padding: 8px 12px; max-height: 128px; overflow: auto; font: 12.5px/1.55 var(--mono); }
+  .res-list li { overflow-wrap: anywhere; }
+  .res-list li.none { color: var(--muted); font-family: var(--sans); }
+  .res.empty .res-list { opacity: .55; }
+
+  /* ---------- embedded tool: Log Sanitizer extras ---------- */
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); }
+  .tab {
+    background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    color: var(--muted); padding: 6px 12px; cursor: pointer;
+    font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
+  }
+  .tab:hover { color: var(--text); }
+  .tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+  details.settings { border: 1px solid var(--line); padding: 8px 12px; }
+  details.settings summary { cursor: pointer; }
+  .grp { margin: 12px 0 6px; }
+  .checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 4px 16px; font-size: 14px; color: var(--muted); }
+  .checks label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+  .tool .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tool .two textarea { min-height: 72px; height: 72px; }
+  .tool .panes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tool .pane { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .tool .panes textarea, .tool .view { min-height: 130px; height: 130px; }
+  .tool .view {
+    width: 100%; overflow: auto; white-space: pre-wrap; word-break: break-all;
+    border: 1px solid var(--line-hi); padding: 12px; font: 13px/1.5 var(--mono); color: var(--text);
+  }
+  .tool mark { background: rgba(255,107,53,.25); color: var(--text); padding: 0 1px; }
+  .tool mark.secret { background: rgba(248,81,73,.38); }
+  .stats { color: var(--muted); font-size: 13px; min-height: 1.2em; }
+  .stats strong { color: var(--text); }
+  .note, .card .tool p.note { color: var(--muted); font-size: 13px; line-height: 1.5; max-width: none; margin-top: 4px; }
+  .err { color: #f85149; font-size: 13px; margin-top: 6px; }
+  .warnbox { border: 1px solid var(--accent); color: #d9b8a8; font-size: 13px; padding: 8px 12px; }
+  label.btn { cursor: pointer; }
+  .card.stretch { grid-column: 1 / -1; }
+  .card.stretch .shot { aspect-ratio: 21 / 9; }
+
+  /* ---------- toolkit ---------- */
+  .kit { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); border-top: 1px solid var(--line); }
+  .kit > div { padding: 24px 24px 8px 0; }
+  .kit h3 { font-weight: 400; margin-bottom: 14px; }
+  .kit ul { list-style: none; }
+  .kit li { padding: 9px 0; border-top: 1px solid var(--line); font-size: 16px; display: flex; justify-content: space-between; gap: 12px; }
+  .kit li span { color: var(--muted); font-size: 14px; text-align: right; }
+  .also { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); color: #b6b5ad; max-width: 60ch; }
+  .also:empty { display: none; }
+
+  /* ---------- contacts ---------- */
+  .contacts { border-top: 1px solid var(--line); }
+  .contacts a {
+    display: grid; grid-template-columns: 140px 1fr auto; align-items: baseline; gap: 16px;
+    padding: 20px 0; border-bottom: 1px solid var(--line);
+    transition: padding .2s, color .2s;
+  }
+  .contacts a .val { overflow-wrap: anywhere; font-family: var(--serif); font-size: clamp(26px, 4vw, 44px); line-height: 1.1; letter-spacing: -.01em; }
+  .contacts a .arr { font-family: var(--mono); color: var(--muted); transition: color .15s, transform .2s; }
+  .contacts a:hover { color: var(--accent); padding-left: 10px; }
+  .contacts a:hover .arr { color: var(--accent); transform: translate(2px, -2px); }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; }
+    .tool .panes, .tool .two { grid-template-columns: 1fr; }
+    .card.wide .shot, .card.stretch .shot { aspect-ratio: 16 / 9; }
+    .top nav { gap: 18px; }
+    .contacts a { grid-template-columns: 1fr auto; }
+    .contacts a .mono { grid-column: 1 / -1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="#top" class="mono" id="nav-name"></a>
+    <nav class="mono" aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#toolkit">Toolkit</a>
+      <a href="#contacts">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===== ABOUT ===== -->
+  <div class="hero">
+    <div class="wrap">
+      <h1 id="name"></h1>
+      <p class="bio" id="bio"></p>
+      <dl class="meta" id="meta"></dl>
+    </div>
+  </div>
+
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Projects<sup id="count"></sup></h2>
+        <div class="filters" id="filters" role="group" aria-label="Filter by type"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== TOOLKIT ===== -->
+  <section id="toolkit">
+    <div class="wrap">
+      <div class="sec-head"><h2>Toolkit</h2></div>
+      <div class="kit" id="kit"></div>
+      <p class="also" id="also"></p>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contacts">
+    <div class="wrap">
+      <div class="sec-head"><h2>Contact</h2></div>
+      <div class="contacts" id="contactList"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap mono">
+    <span id="foot-l"></span>
+    <span id="foot-r"></span>
+  </div>
+</footer>
+
+<!-- Markup of the embedded IOC Extractor (mounted into the card with embed: "ioc") -->
+<template id="tpl-ioc">
+  <div class="tool">
+    <div class="tool-head">
+      <span class="mono">Live tool</span>
+      <span class="mono">Runs in your browser · nothing is sent anywhere</span>
+    </div>
+    <textarea data-r="input" spellcheck="false" aria-label="Text to scan" placeholder="Paste a report, email or log…"></textarea>
+    <div class="tool-row">
+      <button type="button" class="btn sm pri" data-r="sample">Sample</button>
+      <button type="button" class="btn sm" data-r="clear">Clear</button>
+      <span class="sp"></span>
+      <button type="button" class="btn sm" data-r="defang">Defang text</button>
+      <button type="button" class="btn sm" data-r="refang">Refang text</button>
+    </div>
+    <div class="tool-row opts">
+      <label><input type="checkbox" data-r="private"> Hide private IPs</label>
+      <label><input type="checkbox" data-r="defanged"> Show results defanged</label>
+    </div>
+    <div class="out" data-r="outpanel" hidden>
+      <span class="mono" data-r="outtitle">Result</span>
+      <textarea data-r="outtext" readonly spellcheck="false" aria-label="Result"></textarea>
+      <div class="tool-row">
+        <button type="button" class="btn sm" data-r="copyout">Copy</button>
+        <span class="toast mono" data-r="toastout"></span>
+      </div>
+    </div>
+    <div class="tool-row">
+      <span class="mono" data-r="summary">Found: 0</span>
+      <span class="sp"></span>
+      <button type="button" class="btn sm" data-r="csv">Export CSV</button>
+      <button type="button" class="btn sm" data-r="json">Export JSON</button>
+      <button type="button" class="btn sm" data-r="copyall">Copy all</button>
+      <span class="toast mono" data-r="toast"></span>
+    </div>
+    <div class="res-grid" data-r="grid"></div>
+  </div>
+</template>
+
+<!-- Markup of the embedded Log Sanitizer (mounted into the card with embed: "logsan") -->
+<template id="tpl-logsan">
+  <div class="tool">
+    <div class="tool-head">
+      <span class="mono">Live tool</span>
+      <span class="mono">Runs in your browser · nothing is sent anywhere</span>
+    </div>
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab" role="tab" data-r="tab-clean" aria-selected="true">Sanitize</button>
+      <button type="button" class="tab" role="tab" data-r="tab-restore" aria-selected="false">Restore</button>
+    </div>
+
+    <div class="tool" data-r="view-clean" role="tabpanel">
+      <details class="settings">
+        <summary class="mono">Settings</summary>
+        <div class="mono grp">What to mask</div>
+        <div class="checks" data-r="type-boxes"></div>
+        <div class="checks"><label><input type="checkbox" data-r="opt-skip-private"> Skip private and loopback addresses</label></div>
+        <div class="mono grp">Replacement mode</div>
+        <div class="checks" data-r="mode-radios"></div>
+        <div class="mono grp">Behavior</div>
+        <div class="checks">
+          <label><input type="checkbox" data-r="opt-autopaste"> Process automatically on paste/input</label>
+          <label><input type="checkbox" data-r="opt-highlight"> Highlight replacements in the result</label>
+        </div>
+        <div class="two">
+          <div>
+            <div class="mono grp">Whitelist (one value per line)</div>
+            <textarea data-r="whitelist" spellcheck="false" aria-label="Whitelist"></textarea>
+          </div>
+          <div>
+            <div class="mono grp">Custom words or regexes (re: prefix for a regex)</div>
+            <textarea data-r="custom" spellcheck="false" aria-label="Custom words"></textarea>
+            <div class="err" data-r="custom-error" hidden></div>
+          </div>
+        </div>
+        <p class="note">The whitelist and custom words are never saved, just like the text. Only checkboxes and the mode go to localStorage.</p>
+      </details>
+
+      <div class="panes">
+        <div class="pane">
+          <span class="mono">Source text</span>
+          <textarea data-r="input" spellcheck="false" placeholder="Paste a log, config or ticket here…" aria-label="Source text"></textarea>
+        </div>
+        <div class="pane">
+          <span class="mono">Result</span>
+          <textarea data-r="output" spellcheck="false" readonly aria-label="Result"></textarea>
+          <pre class="view" data-r="output-view" hidden></pre>
+          <div class="stats" data-r="stats" aria-live="polite"></div>
+          <div class="note" data-r="highlight-note" hidden></div>
+        </div>
+      </div>
+
+      <div class="tool-row">
+        <button type="button" class="btn sm pri" data-r="btn-run">Process</button>
+        <button type="button" class="btn sm" data-r="btn-copy">Copy result</button>
+        <button type="button" class="btn sm" data-r="btn-txt">Download .txt</button>
+        <button type="button" class="btn sm" data-r="btn-sample">Example</button>
+        <button type="button" class="btn sm" data-r="btn-clear">Clear text</button>
+        <button type="button" class="btn sm" data-r="btn-reset">Reset settings</button>
+        <span class="mono" data-r="status" style="margin-left:auto"></span>
+      </div>
+      <div class="tool-row">
+        <button type="button" class="btn sm" data-r="btn-map">Download mapping (JSON)</button>
+        <span class="note" data-r="map-info"></span>
+      </div>
+      <div class="warnbox" data-r="map-warn" role="alert">The mapping file contains the ORIGINAL secrets. Do not pass it on, attach it to tickets or send it to an AI assistant.</div>
+    </div>
+
+    <div class="tool" data-r="view-restore" role="tabpanel" hidden>
+      <p class="note">Paste text with pseudonyms (for example, an AI assistant reply) and the mapping to get the original values back.</p>
+      <div class="panes">
+        <div class="pane">
+          <span class="mono">Text with pseudonyms</span>
+          <textarea data-r="r-input" spellcheck="false" aria-label="Text with pseudonyms"></textarea>
+        </div>
+        <div class="pane">
+          <span class="mono">Mapping (JSON)</span>
+          <textarea data-r="r-map" spellcheck="false" aria-label="Mapping" placeholder="Paste the mapping JSON or load a file. If left empty, the current session mapping is used."></textarea>
+          <div class="tool-row"><label class="btn sm">Load mapping file<input type="file" data-r="r-file" accept=".json,application/json" hidden></label></div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <button type="button" class="btn sm pri" data-r="r-run">Restore</button>
+        <button type="button" class="btn sm" data-r="r-copy">Copy result</button>
+        <span class="mono" data-r="r-status" style="margin-left:auto"></span>
+      </div>
+      <div class="pane">
+        <span class="mono">Restored text</span>
+        <textarea data-r="r-output" spellcheck="false" readonly aria-label="Restored text"></textarea>
+      </div>
+      <div class="err" data-r="r-error" hidden></div>
+    </div>
+  </div>
+</template>
+
+
+
+<script>
+/* =====================================================================
+   ALL SITE CONTENT LIVES HERE. No need to touch the HTML or CSS below.
+   ===================================================================== */
+const SITE = {
+
+  // ---------- About ----------
+  name:    ["Ravan", "Ibrahimli"],    // two words: the second one is italic. For a single word use ["Nickname"]
+  navName: "Ravan Ibrahimli",
+  bio:     "Computer enthusiast and future cybersecurity specialist. I write software, tinker with microcontrollers and make the occasional game.",
+
+  meta: [
+    { label: "Status",   value: "Currently working on a game", live: true },        // live:true — shows the indicator dot
+    { label: "Now",      value: "Working on co-op optimization" },
+    { label: "Location", value: "Baku, Azerbaijan · UTC+4" },
+  ],
+
+  // ---------- Project types (used by the filter) ----------
+  // key is referenced by projects below, label is the button text
+  // The first type is shown by default. There is no "All" tab.
+  // Game jam entries are regular "game" projects — just add a "Game Jam" tag.
+  types: [
+    { key: "software", label: "Software" },
+    { key: "game",     label: "Games" },
+  ],
+
+  // ---------- PROJECTS ----------
+  // To add a card, copy any object and paste it into the array.
+  //
+  // type   — a key from "types" above
+  // wide   — true: full-width card (good for the flagship project)
+  // status — any short label: "In development", "Released", "Archived"…
+  // media  — preview. Options:
+  //            null                                      → placeholder
+  //            { src: "img/shot.png", alt: "…" }         → image / GIF
+  //            { video: "img/demo.mp4", poster: "…" }    → looping muted video
+  // links  — any buttons: { label, url }. No link? Just remove the object.
+  projects: [
+    // ----- Software -----
+    {
+      title: "IOC Extractor",
+      type: "software",
+      wide: true,
+      embed: "ioc",            // mounts the working tool inside the card (no preview image needed)
+      year: "2026",
+      status: "v1.0.0",
+      desc: "Paste a report, email or log and pull out the indicators of compromise: URLs, domains, IPs, hashes, CVEs. Understands defanged input like hxxp and [.]. Single HTML file, no dependencies.",
+      tags: ["JavaScript", "Security", "Single file", "MIT"],
+      media: null,
+      links: [
+        { label: "Source on GitHub", url: "https://github.com/ravigaming222/ioc-extractor" },
+        { label: "Download",         url: "https://github.com/ravigaming222/ioc-extractor/releases/latest" },
+      ],
+    },
+    {
+      title: "Log Sanitizer",
+      type: "software",
+      wide: true,
+      embed: "logsan",
+      year: "2026",
+      status: "v1.0.1",
+      desc: "Strips sensitive data from logs, tickets and configs before you share them: emails, IPs, tokens, keys, cards, IBANs and more. A reversible pseudonym mode lets you restore the original values after an AI assistant has seen the text. Single HTML file, no dependencies.",
+      tags: ["JavaScript", "Security", "Privacy", "Single file", "MIT"],
+      media: null,
+      links: [
+        { label: "Source on GitHub", url: "https://github.com/ravigaming222/log-sanitizer" },
+        { label: "Download",         url: "https://github.com/ravigaming222/log-sanitizer/releases/latest" },
+      ],
+    },
+
+    // ----- Games (jam entries go here too) -----
+    {
+      title: "Ticking Tom!",
+      type: "game",
+      wide: true,
+      year: "2026",
+      status: "Micro Jam 062 · Speed",
+      desc: "A platformer made for Micro Jam 062, theme “Speed”. You are locked in a cell with a bomb: collect cords to slow its fuse, ram the key at full speed, blow the door and escape. About 30 seconds of gameplay, built in a team of three.",
+      tags: ["Game Jam", "Platformer", "Browser", "Team of 3"],
+      // media as an array = gallery: the first image is shown, the rest become clickable thumbnails.
+      // src "asset:NAME" points to an image embedded at the very bottom of this file (ASSETS).
+      // You can also use a normal path ("img/shot.png") or URL instead.
+      media: [
+        { src: "asset:tom1", alt: "Ticking Tom! — the prison cell" },
+        { src: "asset:tom2", alt: "Ticking Tom! — the bomb" },
+      ],
+      links: [
+        { label: "Play on itch.io", url: "https://ravigaming47.itch.io/ticking-tom" },
+        { label: "Jam page",        url: "https://itch.io/jam/micro-jam-062" },
+      ],
+    },
+  ],
+
+  // ---------- TOOLKIT ----------
+  // Add or remove groups freely. "note" is an optional label on the right.
+  toolkit: [
+    { group: "Languages", items: [
+      { name: "Rust",       note: "tooling" },
+      { name: "C / C++",    note: "firmware" },
+      { name: "Python",     note: "scripts" },
+      { name: "Java / C#",    note: "games" },
+    ]},
+    { group: "Tools & engines", items: [
+      { name: "Neovim",     note: "editor" },
+      { name: "Git" },
+      { name: "Unity",      note: "games" },
+      { name: "Linux",      note: "daily" },
+    ]},
+  ],
+
+
+  // ---------- CONTACT ----------
+  contacts: [
+    { label: "Email",    value: "ravanibrahimli2012@gmail.com",   url: "mailto:ravanibrahimli2012@gmail.com" },
+    { label: "GitHub",   value: "github.com/ravigaming222", url: "https://github.com/ravigaming222" },
+    { label: "itch.io",  value: "ravigaming47.itch.io",url: "https://ravigaming47.itch.io/" },
+    { label: "Telegram", value: "@ravigaming47",         url: "https://t.me/ravigaming47" },
+  ],
+
+  footer: { left: "© 2026 Ravan Ibrahimli", right: "Updated: November 2026" },
+};
+/* ===================== end of settings ===================== */
+
+
+/* ---------- rendering (no need to edit) ---------- */
+const $ = (id) => document.getElementById(id);
+
+function h(tag, attrs = {}, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v;
+    else if (k === "text") el.textContent = v;
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  kids.flat().forEach(k => k != null && el.append(k));
+  return el;
+}
+const isExternal = (u) => /^https?:/i.test(u);
+function link(cls, label, url, arrow = "↗") {
+  return h("a", {
+    class: cls, href: url,
+    target: isExternal(url) ? "_blank" : null,
+    rel: isExternal(url) ? "noopener noreferrer" : null,
+  }, h("span", { text: label }), h("span", { class: "arr", "aria-hidden": "true", text: arrow }));
+}
+
+// header
+document.title = `${SITE.navName} — Portfolio`;
+$("nav-name").textContent = SITE.navName;
+const [first, second] = SITE.name;
+$("name").append(first, second ? h("br") : "", second ? h("em", { text: second }) : "");
+$("bio").textContent = SITE.bio;
+
+SITE.meta.forEach(m => {
+  $("meta").append(h("div", {},
+    h("dt", { class: "mono", text: m.label }),
+    h("dd", {}, m.live ? h("span", { class: "dot" }) : null, m.value)
+  ));
+});
+
+// projects
+const typeLabel = Object.fromEntries(SITE.types.map(t => [t.key, t.label]));
+
+// loads m.src (or m.fallback if it fails); "asset:NAME" resolves to an embedded image from ASSETS
+function loadWithFallback(img, m, onFail) {
+  let triedFallback = false;
+  const resolve = (s) => (s && s.startsWith("asset:")) ? ((window.ASSETS || {})[s.slice(6)] || "") : s;
+  img.addEventListener("error", () => {
+    if (m.fallback && !triedFallback) { triedFallback = true; img.src = resolve(m.fallback); }
+    else if (onFail) onFail();
+  });
+  const go = () => { img.src = resolve(m.src); };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else go();
+}
+
+function shot(media, title) {
+  if (Array.isArray(media) && media.length) {
+    const first = media[0];
+    const main = h("img", { alt: first.alt || title, referrerpolicy: "no-referrer" });
+    const box = h("div", { class: "shot gallery" }, main);
+    let current = first;
+    loadWithFallback(main, first, () => box.classList.add("broken"));
+    if (media.length > 1) {
+      const bar = h("div", { class: "thumbs" });
+      media.forEach((m, i) => {
+        const timg = h("img", { alt: "", loading: "lazy", referrerpolicy: "no-referrer" });
+        loadWithFallback(timg, m, () => timg.classList.add("broken"));
+        const b = h("button", { type: "button", class: "thumb" + (i === 0 ? " on" : ""), "aria-label": "Show image " + (i + 1) }, timg);
+        b.addEventListener("click", () => {
+          box.classList.remove("broken");
+          main.alt = m.alt || title;
+          main.src = timg.currentSrc || timg.src;   // reuse whichever source worked for the thumbnail
+          bar.querySelectorAll(".thumb").forEach(x => x.classList.toggle("on", x === b));
+        });
+        bar.append(b);
+      });
+      box.append(bar);
+    }
+    return box;
+  }
+  if (media && media.video) {
+    return h("div", { class: "shot" }, h("video", {
+      src: media.video, poster: media.poster || null,
+      autoplay: true, muted: true, loop: true, playsinline: true,
+      "aria-label": title,
+    }));
+  }
+  if (media && media.src) {
+    return h("div", { class: "shot" }, h("img", {
+      src: media.src, alt: media.alt || title, loading: "lazy",
+    }));
+  }
+  return h("div", { class: "shot empty" }, h("span", { class: "mono", text: "preview · 16:9" }));
+}
+
+function card(p) {
+  return h("article", { class: "card" + (p.wide ? " wide" : ""), "data-type": p.type },
+    p.embed ? null : shot(p.media, p.title),
+    h("div", { class: "body" },
+      h("div", { class: "row" },
+        h("span", { class: "mono", text: typeLabel[p.type] || p.type }),
+        h("span", { class: "mono", text: p.year || "" }),
+      ),
+      h("h3", { text: p.title }),
+      p.status ? h("span", { class: "mono status-tag", text: p.status }) : null,
+      h("p", { text: p.desc }),
+      p.tags && p.tags.length ? h("ul", { class: "tags" }, p.tags.map(t => h("li", { text: t }))) : null,
+      p.embed ? h("div", { class: "embed", "data-embed": p.embed }) : null,
+      p.links && p.links.length ? h("div", { class: "links" }, p.links.map(l => link("btn sm", l.label, l.url))) : null,
+    )
+  );
+}
+
+SITE.projects.forEach(p => $("grid").append(card(p)));
+
+// filters
+let current = SITE.types[0].key;
+function applyFilter() {
+  let shown = 0;
+  document.querySelectorAll("#grid .card").forEach(c => {
+    const ok = c.dataset.type === current;
+    c.hidden = !ok;
+    if (ok) shown++;
+  });
+  // avoid holes in the grid: a lone half-width card takes the whole row
+  let col = 0, prev = null;
+  document.querySelectorAll("#grid .card").forEach(c => {
+    c.classList.remove("stretch");
+    if (c.hidden) return;
+    if (c.classList.contains("wide")) { if (col === 1 && prev) prev.classList.add("stretch"); col = 0; prev = null; return; }
+    col = (col + 1) % 2; prev = c;
+  });
+  if (col === 1 && prev) prev.classList.add("stretch");
+  document.querySelectorAll("#filters button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.key === current)));
+  $("count").textContent = String(shown).padStart(2, "0");
+}
+SITE.types.forEach(t => {
+  $("filters").append(h("button", { type: "button", "data-key": t.key, "aria-pressed": "false", text: t.label }));
+});
+$("filters").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  current = b.dataset.key;
+  applyFilter();
+});
+applyFilter();
+
+// toolkit
+SITE.toolkit.forEach(g => {
+  $("kit").append(h("div", {},
+    h("h3", { class: "mono", text: g.group }),
+    h("ul", {}, g.items.map(i => h("li", {}, i.name, i.note ? h("span", { text: i.note }) : null)))
+  ));
+});
+$("also").textContent = SITE.also || "";
+
+// contacts
+SITE.contacts.forEach(c => {
+  $("contactList").append(h("a", {
+    href: c.url,
+    target: isExternal(c.url) ? "_blank" : null,
+    rel: isExternal(c.url) ? "noopener noreferrer" : null,
+  },
+    h("span", { class: "mono", text: c.label }),
+    h("span", { class: "val", text: c.value }),
+    h("span", { class: "arr", "aria-hidden": "true", text: "↗" }),
+  ));
+});
+
+$("foot-l").textContent = SITE.footer.left;
+$("foot-r").textContent = SITE.footer.right;
+
+// embedded tools: each one registers a mount function in EMBEDS (see the next script)
+window.EMBEDS = {};
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-embed]").forEach(el => {
+    const mount = EMBEDS[el.dataset.embed];
+    if (mount) mount(el);
+  });
+});
+</script>
+
+<script>
+/* =====================================================================
+   EMBEDDED TOOL: IOC Extractor (https://github.com/ravigaming222/ioc-extractor)
+   Logic is identical to the standalone ioc-extractor.html; only the UI is
+   restyled and scoped to the card. Nothing here needs editing.
+   ===================================================================== */
+
+// ===== IOC-LOGIC-START (pure logic, no DOM; tested from Node) =====
+const FILE_EXTS = new Set([
+  "exe","dll","js","php","pdf","zip","png","jpg","jpeg","gif","bmp","svg","ico","css","html","htm",
+  "txt","doc","docx","xls","xlsx","ppt","pptx","rar","7z","gz","tar","bat","cmd","ps1","vbs","jar",
+  "msi","sys","lnk","iso","dat","log","tmp","bin","json","xml","csv","yml","yaml","ini","cfg","conf",
+  "asp","aspx","jsp","cgi","docm","xlsm","scr","dmp","bak","swf","mp3","mp4","avi"
+]);
+
+const TYPES = ["urls","domains","ipv4","ipv6","emails","md5","sha1","sha256","cve"];
+
+function refang(text) {
+  const tt = (m) => m.replace(/x/g, "t").replace(/X/g, "T"); // keeps letter case
+  return String(text)
+    .replace(/\bhxxps?\b/gi, tt)
+    .replace(/\bfxp\b/gi, tt)
+    .replace(/\[:\/\/\]/g, "://")
+    .replace(/\[:\]/g, ":")
+    .replace(/\[\.\]|\(\.\)|\{\.\}|\[dot\]|\(dot\)|\{dot\}/gi, ".")
+    .replace(/\[@\]|\(at\)|\[at\]/gi, "@");
+}
+
+function toIPv4Parts(ip) { return ip.split(".").map(Number); }
+
+function isPrivateIPv4(ip) {
+  const [a, b] = toIPv4Parts(ip);
+  return a === 10 || a === 127 || a === 0 ||
+    (a === 172 && b >= 16 && b <= 31) ||
+    (a === 192 && b === 168) ||
+    (a === 169 && b === 254);
+}
+
+function validIPv6(s) {
+  if (!/^[0-9a-f:]+$/i.test(s) || !/[0-9a-f]/i.test(s) || s.includes(":::")) return false;
+  const halves = s.split("::");
+  if (halves.length > 2) return false;
+  const groups = (h) => (h === "" ? [] : h.split(":"));
+  const ok = (g) => g.every((x) => /^[0-9a-f]{1,4}$/i.test(x));
+  if (halves.length === 2) {
+    const all = groups(halves[0]).concat(groups(halves[1]));
+    return all.length <= 7 && ok(all);
+  }
+  const all = s.split(":");
+  return all.length === 8 && ok(all);
+}
+
+function trimUrl(u) {
+  const pairs = { ")": "(", "]": "[", "}": "{" };
+  for (;;) {
+    const last = u[u.length - 1];
+    if (last && ".,;:!?'\"<>*".includes(last)) { u = u.slice(0, -1); continue; }
+    if (last && pairs[last]) {
+      const open = u.split(pairs[last]).length - 1;
+      const close = u.split(last).length - 1;
+      if (close > open) { u = u.slice(0, -1); continue; }
+    }
+    return u;
+  }
+}
+
+function urlHost(u) {
+  const m = /^[a-z]+:\/\/([^\/?#]*)/i.exec(u);
+  if (!m) return "";
+  let h = m[1].replace(/^.*@/, "");
+  if (h[0] === "[") return "";
+  return h.replace(/:\d*$/, "");
+}
+
+function uniq(arr) { return Array.from(new Set(arr)); }
+
+function extract(text, opts) {
+  const o = opts || {};
+  const t = refang(text);
+  const res = {};
+  TYPES.forEach((k) => { res[k] = []; });
+
+  // URLs
+  const urlRe = /\b(?:https?|ftp):\/\/[^\s<>"'`]+/gi;
+  const urls = (t.match(urlRe) || []).map(trimUrl).filter((u) => /:\/\/./.test(u));
+  res.urls = uniq(urls);
+
+  // Emails
+  const emailRe = /(?<![A-Za-z0-9._%+-])[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,24}(?![A-Za-z0-9-])/g;
+  res.emails = uniq((t.match(emailRe) || []).map((e) => e.toLowerCase()));
+
+  // IPv4
+  const ipRe = /(?<![\w.])(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?!\d|\.\d)(?![\w])/g;
+  let ips = uniq(t.match(ipRe) || []);
+  if (o.hidePrivate) ips = ips.filter((ip) => !isPrivateIPv4(ip));
+  res.ipv4 = ips;
+
+  // IPv6 (simplified)
+  const v6Re = /(?<![\w:.])(?:[0-9a-f]{0,4}:){2,7}[0-9a-f]{0,4}(?![\w:])/gi;
+  res.ipv6 = uniq((t.match(v6Re) || []).filter(validIPv6).map((x) => x.toLowerCase()));
+
+  // Domains: URL paths are cut off so that only hosts are scanned
+  const hostText = t.replace(urlRe, (m) => " " + urlHost(trimUrl(m)) + " ");
+  const domRe = /(?<![\w.-])(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+([a-z]{2,24})(?![\w-])/gi;
+  const doms = [];
+  let m;
+  while ((m = domRe.exec(hostText))) {
+    const tld = m[1].toLowerCase();
+    const d = m[0].toLowerCase();
+    if (/^\d+$/.test(tld) || FILE_EXTS.has(tld)) continue;
+    if (/^(?:\d{1,3}\.){3}\d{1,3}$/.test(d)) continue;
+    doms.push(d);
+  }
+  res.domains = uniq(doms);
+
+  // Hashes (lookarounds: never cut pieces out of longer hex strings)
+  const hash = (n) => uniq((t.match(new RegExp("(?<![0-9a-f])[0-9a-f]{" + n + "}(?![0-9a-f])", "gi")) || []).map((h) => h.toLowerCase()));
+  res.md5 = hash(32);
+  res.sha1 = hash(40);
+  res.sha256 = hash(64);
+
+  // CVE
+  res.cve = uniq((t.match(/\bCVE-\d{4}-\d{4,7}\b/gi) || []).map((c) => c.toUpperCase()));
+  return res;
+}
+
+function defangValue(value, type) {
+  const v = String(value);
+  switch (type) {
+    case "urls":
+      return v
+        .replace(/^(?:https?|ftp)(?=:)/i, (m) => m.replace(/tt/, "xx").replace(/TT/, "XX").replace(/t/, "x").replace(/T/, "X"))
+        .replace("://", "[://]")
+        .replace(/\./g, "[.]");
+    case "domains":
+    case "ipv4":
+      return v.replace(/\./g, "[.]");
+    case "ipv6":
+      return v.replace(/:/g, "[:]");
+    case "emails":
+      return v.replace(/@/g, "[@]").replace(/\./g, "[.]");
+    default:
+      return v;
+  }
+}
+
+function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&"); }
+
+function defangText(text) {
+  const t = refang(text);
+  const found = extract(t, { hidePrivate: false });
+  const items = [];
+  ["urls", "domains", "ipv4", "ipv6", "emails"].forEach((type) => {
+    found[type].forEach((value) => items.push({ value, type }));
+  });
+  // longest first, replaced through markers so replacements never overlap
+  items.sort((a, b) => b.value.length - a.value.length);
+  const repl = [];
+  let out = t;
+  items.forEach(({ value, type }) => {
+    const body = escapeRe(value);
+    const re = type === "urls"
+      ? new RegExp(body, "gi")
+      : new RegExp("(?<![A-Za-z0-9_-])" + body + "(?![A-Za-z0-9_-])" + (type === "ipv4" ? "(?!\\.\\d)" : ""), "gi");
+    out = out.replace(re, (m) => {
+      repl.push(defangValue(m, type));
+      return "\u0001" + (repl.length - 1) + "\u0002";
+    });
+  });
+  return out.replace(/\u0001(\d+)\u0002/g, (_, i) => repl[Number(i)]);
+}
+// ===== IOC-LOGIC-END =====
+
+// ===== UI (scoped to one card) =====
+EMBEDS.ioc = function (host) {
+  host.append(document.getElementById("tpl-ioc").content.cloneNode(true));
+  const q = (r) => host.querySelector('[data-r="' + r + '"]');
+
+  const LABELS = {
+    urls: "URL", domains: "Domains", ipv4: "IPv4", ipv6: "IPv6", emails: "E-mail",
+    md5: "MD5", sha1: "SHA-1", sha256: "SHA-256", cve: "CVE"
+  };
+  const SAMPLE = [
+    "Incident report (demo)",
+    "",
+    "The user received an email from billing-support[@]secure-mail[.]top with a link hxxps://login-update[.]example-bank[.]xyz/auth/verify.php?id=42.",
+    "The loader downloaded hxxp://185[.]220[.]101[.]45:8080/payload.exe and contacted the C2 evil-cdn(.)net and 91.214.124[.]7.",
+    "Internal addresses 192.168.1.15 and 10.0.0.7 are not related to the incident. IPv6 C2: 2001:db8:85a3::8a2e:370:7334.",
+    "",
+    "Hashes:",
+    "MD5: 44d88612fea8a8f36de82e1278abb02f",
+    "SHA-1: 3395856ce81f2b7382dee72602f798b642f14140",
+    "SHA-256: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+    "",
+    "CVE-2021-44228 (Log4Shell) is exploited, see also CVE-2023-23397.",
+    "Contact: soc[at]example[dot]org"
+  ].join("\n");
+
+  const input = q("input"), grid = q("grid");
+  let current = null; // { type: [values to display] }
+
+  function compute() {
+    const raw = extract(input.value, { hidePrivate: q("private").checked });
+    const defanged = q("defanged").checked;
+    const view = {};
+    TYPES.forEach((k) => { view[k] = defanged ? raw[k].map((v) => defangValue(v, k)) : raw[k]; });
+    return view;
+  }
+
+  function flash(el, msg) {
+    el.textContent = msg;
+    setTimeout(() => { el.textContent = ""; }, 1500);
+  }
+
+  async function copy(text, toastEl) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (e) {
+      const ta = document.createElement("textarea");
+      ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (e2) { /* ignore */ }
+      document.body.removeChild(ta);
+    }
+    flash(toastEl, "Copied");
+  }
+
+  function render() {
+    current = compute();
+    grid.textContent = "";
+    let total = 0;
+    TYPES.forEach((k) => {
+      const vals = current[k];
+      total += vals.length;
+      const cell = document.createElement("div");
+      cell.className = "res" + (vals.length ? "" : " empty");
+
+      const head = document.createElement("div"); head.className = "res-h";
+      const title = document.createElement("span"); title.className = "mono"; title.style.color = "var(--text)"; title.textContent = LABELS[k];
+      const badge = document.createElement("span"); badge.className = "mono"; badge.textContent = String(vals.length);
+      const sp = document.createElement("span"); sp.className = "sp";
+      const toast = document.createElement("span"); toast.className = "toast mono";
+      const btn = document.createElement("button"); btn.type = "button"; btn.className = "btn sm"; btn.textContent = "Copy"; btn.disabled = !vals.length;
+      btn.addEventListener("click", () => copy(vals.join("\n"), toast));
+      head.append(title, badge, sp, toast, btn);
+
+      const ul = document.createElement("ul"); ul.className = "res-list";
+      if (!vals.length) {
+        const li = document.createElement("li"); li.className = "none"; li.textContent = "Nothing found"; ul.appendChild(li);
+      } else {
+        vals.forEach((v) => { const li = document.createElement("li"); li.textContent = v; ul.appendChild(li); });
+      }
+      cell.append(head, ul);
+      if (vals.length) grid.appendChild(cell);   // empty types are hidden to keep the tool compact
+    });
+    grid.hidden = total === 0;
+    q("summary").textContent = "Found: " + total;
+    ["csv", "json", "copyall"].forEach((r) => { q(r).disabled = total === 0; });
+  }
+
+  function csvCell(v) { return /[",\r\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+
+  function download(name, mime, content) {
+    const url = URL.createObjectURL(new Blob([content], { type: mime }));
+    const a = document.createElement("a");
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function showOut(title, text) {
+    q("outpanel").hidden = false;
+    q("outtitle").textContent = title;
+    q("outtext").value = text;
+  }
+
+  input.addEventListener("input", render);
+  q("private").addEventListener("change", render);
+  q("defanged").addEventListener("change", render);
+  q("sample").addEventListener("click", () => { input.value = SAMPLE; render(); });
+  q("clear").addEventListener("click", () => {
+    input.value = ""; q("outtext").value = ""; q("outpanel").hidden = true; render();
+  });
+  q("defang").addEventListener("click", () => showOut("Result: defang text", defangText(input.value)));
+  q("refang").addEventListener("click", () => showOut("Result: refang text", refang(input.value)));
+  q("copyout").addEventListener("click", () => copy(q("outtext").value, q("toastout")));
+  q("copyall").addEventListener("click", () => {
+    const parts = [];
+    TYPES.forEach((k) => { if (current[k].length) parts.push("# " + LABELS[k] + "\n" + current[k].join("\n")); });
+    copy(parts.join("\n\n"), q("toast"));
+  });
+  q("csv").addEventListener("click", () => {
+    const rows = ["type,value"];
+    TYPES.forEach((k) => current[k].forEach((v) => rows.push(k + "," + csvCell(v))));
+    download("iocs.csv", "text/csv;charset=utf-8", rows.join("\r\n") + "\r\n");
+  });
+  q("json").addEventListener("click", () => {
+    download("iocs.json", "application/json", JSON.stringify(current, null, 2) + "\n");
+  });
+
+  render();
+};
+</script>
+<script>
+/* =====================================================================
+   EMBEDDED TOOL: Log Sanitizer (https://github.com/ravigaming222/log-sanitizer)
+   Logic is identical to the standalone log-sanitizer.html; only the UI is
+   restyled and scoped to the card. Nothing here needs editing.
+   ===================================================================== */
+
+/* === LOGIC:START === */
+const LS = (function () {
+  'use strict';
+
+  // ---------- Labels and protection against re-masking ----------
+  // A value that is already one of our labels is never masked again.
+  const LABEL_RE = /^(?:\[[A-Z][A-Z0-9_]*\]|[A-Z][A-Z0-9_]*_\d+|\*{3,}[^\s*]{0,4})$/;
+  const ALIAS_TOKEN_RE = /\b[A-Z][A-Z0-9_]*_\d+\b/g;
+  const PARTIAL_TYPES = new Set(['CARD', 'KEY', 'JWT', 'SECRET']);
+
+  const DEFAULT_TYPES = {
+    email: true, ipv4: true, ipv6: true, mac: true, jwt: true, keys: true,
+    authhdr: true, kv: true, urlcreds: true, privkey: true, card: true,
+    iban: true, phone: true,
+    hosts: false, uuid: false, usernames: false, custom: false
+  };
+
+  // ---------- Validators ----------
+  function luhnOk(digits) {
+    if (!/^\d{13,19}$/.test(digits)) return false;
+    let sum = 0, alt = false;
+    for (let i = digits.length - 1; i >= 0; i--) {
+      let d = digits.charCodeAt(i) - 48;
+      if (alt) { d *= 2; if (d > 9) d -= 9; }
+      sum += d; alt = !alt;
+    }
+    return sum % 10 === 0;
+  }
+
+  function ibanOk(s) {
+    if (!/^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/.test(s)) return false;
+    const r = s.slice(4) + s.slice(0, 4);
+    let rem = 0;
+    for (let i = 0; i < r.length; i++) {
+      const c = r.charCodeAt(i);
+      if (c >= 65) rem = (rem * 100 + (c - 55)) % 97;
+      else rem = (rem * 10 + (c - 48)) % 97;
+    }
+    return rem === 1;
+  }
+
+  function ipv4Private(ip) {
+    const p = ip.split('.').map(Number);
+    return p[0] === 10 || p[0] === 127 || (p[0] === 192 && p[1] === 168) ||
+      (p[0] === 172 && p[1] >= 16 && p[1] <= 31) || (p[0] === 169 && p[1] === 254);
+  }
+
+  function ipv6Ok(s) {
+    if (!/^[0-9A-Fa-f:]+$/.test(s) || !/[0-9A-Fa-f]/.test(s) || s.includes(':::')) return false;
+    const halves = s.split('::');
+    if (halves.length > 2) return false;
+    const groups = (p) => (p === '' ? [] : p.split(':'));
+    const valid = (g) => g.every((x) => /^[0-9A-Fa-f]{1,4}$/.test(x));
+    if (halves.length === 1) { const g = s.split(':'); return g.length === 8 && valid(g); }
+    const a = groups(halves[0]), b = groups(halves[1]);
+    return valid(a) && valid(b) && a.length + b.length <= 7;
+  }
+
+  function ipv6Private(s) {
+    const l = s.toLowerCase();
+    return l === '::1' || l === '::' || /^fe[89ab]/.test(l) || /^f[cd]/.test(l);
+  }
+
+  // ---------- Detectors ----------
+  function scan(re, text, cb) {
+    re.lastIndex = 0;
+    let m;
+    while ((m = re.exec(text)) !== null) {
+      if (m[0].length === 0) { re.lastIndex++; continue; }
+      cb(m);
+    }
+  }
+
+  const RE = {
+    privkey: /-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z0-9 ]*PRIVATE KEY-----/g,
+    jwt: /(?<![A-Za-z0-9_-])eyJ[A-Za-z0-9_-]{4,}\.[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]+/g,
+    keys: new RegExp('(?<![A-Za-z0-9_])(?:' + [
+      '(?:AKIA|ASIA)[0-9A-Z]{16}',
+      'github_pat_[A-Za-z0-9_]{22,255}',
+      'gh[pousr]_[A-Za-z0-9]{20,255}',
+      'xox[baprs]-[A-Za-z0-9-]{10,}',
+      'AIza[0-9A-Za-z_-]{35}',
+      '(?:sk|rk)_live_[0-9A-Za-z]{16,}',
+      'npm_[A-Za-z0-9]{30,}',
+      'glpat-[A-Za-z0-9_-]{20,}'
+    ].join('|') + ')(?![A-Za-z0-9])', 'g'),
+    authorization: /\bauthorization["']?[ \t]*[:=][ \t]*["']?(?:(?:Bearer|Basic|Negotiate|Token)[ \t]+)?([^\s"',;]+)/gid,
+    apikeyHeader: /\bx-api-key["']?[ \t]*[:=][ \t]*["']?([^\s"',;]+)/gid,
+    cookie: /\b(?:set-cookie|cookie)["']?[ \t]*:[ \t]*["']?([^\r\n"]*)/gid,
+    kv: /(?<![A-Za-z0-9])(?:[A-Za-z0-9]{1,20}[_.-]){0,3}(?:password|passwd|pwd|secret|token|api[_-]?key|apikey|access[_-]?key|private[_-]?key|client[_-]?secret|auth)(?:["']?[ \t]*[:=][ \t]*)("(?:[^"\\\r\n]|\\.)*"|'[^'\r\n]*'|\[[A-Z][A-Z0-9_]*\]|[^\s,;&"'}\]]+)/gid,
+    urlcreds: /\b[A-Za-z][A-Za-z0-9+.-]*:\/\/([^\s:@\/?#]+):([^\s@\/?#]*)@/gd,
+    card: /(?<![\d.])(?<!\d[ -])[2-6](?:[ -]?\d){12,18}(?!\d|\.\d)/g,
+    iban: /(?<![A-Za-z0-9])[A-Z]{2}\d{2}(?: ?[A-Z0-9]{4}){2,7}(?: ?[A-Z0-9]{1,3})?(?![A-Za-z0-9])/g,
+    email: /(?<![A-Za-z0-9._%+*-])[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z]{2,}(?![A-Za-z0-9-])/g,
+    ipv4: /(?<![\w.])(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?!\w|\.\d)/g,
+    ipv6: /(?<![\w:.])(?:[0-9A-Fa-f]{0,4}:){2,7}[0-9A-Fa-f]{0,4}(?![\w.])/g,
+    mac: /(?<![\w:-])[0-9A-Fa-f]{2}([:-])(?:[0-9A-Fa-f]{2}\1){4}[0-9A-Fa-f]{2}(?![\w])(?![:-][0-9A-Fa-f])/g,
+    phone: /(?<![\w+])\+\d[\d ()\-]{6,20}\d(?!\d)/g,
+    hosts: /(?<![\w@.-])(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+(?:internal|local|lan|corp|intranet|home|localdomain|private|com|net|org|io|dev|app|co|info|biz|edu|gov|ru|de|uk|fr|nl|us|eu|cloud|xyz|me|tech)(?![\w-])/gi,
+    uuid: /(?<![\w-])[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(?![\w-])/gi,
+    userKv: /(?<![A-Za-z0-9])user(?:name)?["']?[ \t]*[:=][ \t]*["']?([^\s"',;&]+)/gid,
+    userFor: /\bfor[ \t]+(?:invalid[ \t]+user[ \t]+)?([A-Za-z0-9._-]+)[ \t]+from\b/gd
+  };
+
+  const COOKIE_ATTRS = new Set(['path', 'domain', 'expires', 'max-age', 'samesite', 'secure', 'httponly', 'priority', 'partitioned']);
+  const KV_SKIP = new Set(['null', 'true', 'false', 'none', 'undefined']);
+  const VERSION_CTX = /(?:version|ver|v|build|release|rev)[\s:=_.-]*$/i;
+  const USER_FALSE = new Set(['from', 'for']);
+
+  // pri: lower number means higher priority
+  const DETECTORS = [
+    { id: 'privkey', pri: 1, find(text, o, push) {
+      scan(RE.privkey, text, (m) => push(m.index, m.index + m[0].length, 'PRIVATE_KEY'));
+    } },
+    { id: 'jwt', pri: 2, find(text, o, push) {
+      scan(RE.jwt, text, (m) => push(m.index, m.index + m[0].length, 'JWT'));
+    } },
+    { id: 'keys', pri: 2, find(text, o, push) {
+      scan(RE.keys, text, (m) => push(m.index, m.index + m[0].length, 'KEY'));
+    } },
+    { id: 'urlcreds', pri: 3, find(text, o, push) {
+      scan(RE.urlcreds, text, (m) => {
+        push(m.indices[1][0], m.indices[1][1], 'USER');
+        push(m.indices[2][0], m.indices[2][1], 'SECRET');
+      });
+    } },
+    { id: 'authhdr', pri: 4, find(text, o, push) {
+      scan(RE.authorization, text, (m) => push(m.indices[1][0], m.indices[1][1], 'SECRET'));
+      scan(RE.apikeyHeader, text, (m) => push(m.indices[1][0], m.indices[1][1], 'SECRET'));
+      scan(RE.cookie, text, (m) => {
+        const base = m.indices[1][0];
+        const line = m[1];
+        const seg = /([^=;\s][^=;]*)=([^;]*)/g;
+        let s;
+        while ((s = seg.exec(line)) !== null) {
+          if (COOKIE_ATTRS.has(s[1].trim().toLowerCase())) continue;
+          const raw = s[2];
+          const lead = raw.length - raw.trimStart().length;
+          const val = raw.trim();
+          if (!val) continue;
+          const start = base + s.index + s[0].length - raw.length + lead;
+          push(start, start + val.length, 'SECRET');
+        }
+      });
+    } },
+    { id: 'kv', pri: 4, find(text, o, push) {
+      scan(RE.kv, text, (m) => {
+        let s = m.indices[1][0], e = m.indices[1][1];
+        const c = text[s];
+        if ((c === '"' || c === "'") && e - s >= 2 && text[e - 1] === c) { s++; e--; }
+        if (e <= s) return;
+        if (KV_SKIP.has(text.slice(s, e).toLowerCase())) return;
+        push(s, e, 'SECRET');
+      });
+    } },
+    { id: 'card', pri: 5, find(text, o, push) {
+      scan(RE.card, text, (m) => {
+        if (luhnOk(m[0].replace(/\D/g, ''))) push(m.index, m.index + m[0].length, 'CARD');
+      });
+    } },
+    { id: 'iban', pri: 5, find(text, o, push) {
+      scan(RE.iban, text, (m) => {
+        let cand = m[0];
+        for (;;) {
+          if (ibanOk(cand.replace(/ /g, ''))) { push(m.index, m.index + cand.length, 'IBAN'); return; }
+          const i = cand.lastIndexOf(' ');
+          if (i < 0) return;
+          cand = cand.slice(0, i);
+        }
+      });
+    } },
+    { id: 'email', pri: 6, find(text, o, push) {
+      scan(RE.email, text, (m) => {
+        const local = m[0].slice(0, m[0].indexOf('@'));
+        if (LABEL_RE.test(local)) return;
+        push(m.index, m.index + m[0].length, 'EMAIL');
+      });
+    } },
+    { id: 'ipv4', pri: 7, find(text, o, push) {
+      scan(RE.ipv4, text, (m) => {
+        if (VERSION_CTX.test(text.slice(Math.max(0, m.index - 16), m.index))) return;
+        if (o.skipPrivate && ipv4Private(m[0])) return;
+        push(m.index, m.index + m[0].length, 'IPV4');
+      });
+    } },
+    { id: 'ipv6', pri: 7, find(text, o, push) {
+      scan(RE.ipv6, text, (m) => {
+        let cand = m[0];
+        if (!ipv6Ok(cand) && cand.endsWith(':') && !cand.endsWith('::')) cand = cand.slice(0, -1);
+        if (!ipv6Ok(cand)) return;
+        if (o.skipPrivate && ipv6Private(cand)) return;
+        push(m.index, m.index + cand.length, 'IPV6');
+      });
+    } },
+    { id: 'mac', pri: 7, find(text, o, push) {
+      scan(RE.mac, text, (m) => push(m.index, m.index + m[0].length, 'MAC'));
+    } },
+    { id: 'phone', pri: 8, find(text, o, push) {
+      scan(RE.phone, text, (m) => {
+        const v = m[0];
+        const digits = v.replace(/\D/g, '').length;
+        if (digits < 8 || digits > 15) return;
+        if (/[ \-]{2,}/.test(v)) return;
+        if (/^\+\d{4}-\d{2}-\d{2}$/.test(v)) return;
+        push(m.index, m.index + v.length, 'PHONE');
+      });
+    } },
+    { id: 'hosts', pri: 9, find(text, o, push) {
+      scan(RE.hosts, text, (m) => push(m.index, m.index + m[0].length, 'HOST'));
+    } },
+    { id: 'uuid', pri: 9, find(text, o, push) {
+      scan(RE.uuid, text, (m) => push(m.index, m.index + m[0].length, 'UUID'));
+    } },
+    { id: 'usernames', pri: 9, find(text, o, push) {
+      scan(RE.userKv, text, (m) => push(m.indices[1][0], m.indices[1][1], 'USER'));
+      scan(RE.userFor, text, (m) => {
+        if (USER_FALSE.has(m[1].toLowerCase())) return;
+        push(m.indices[1][0], m.indices[1][1], 'USER');
+      });
+    } },
+    { id: 'custom', pri: 9, find(text, o, push) {
+      const built = buildCustom(o.custom);
+      for (const re of built.regexes) scan(re, text, (m) => push(m.index, m.index + m[0].length, 'CUSTOM'));
+    } }
+  ];
+
+  function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  // Custom words and regexes. Invalid regexes do not throw, they are reported in errors.
+  function buildCustom(lines) {
+    const words = [], regexes = [], errors = [];
+    for (const raw of lines || []) {
+      const line = String(raw).trim();
+      if (!line) continue;
+      if (line.startsWith('re:')) {
+        const src = line.slice(3);
+        if (!src) continue;
+        try { regexes.push(new RegExp(src, 'g')); } catch (e) { errors.push(line + ': ' + e.message); }
+      } else words.push(line);
+    }
+    if (words.length) {
+      words.sort((a, b) => b.length - a.length);
+      regexes.push(new RegExp(words.map(escapeRe).join('|'), 'g'));
+    }
+    return { regexes, errors };
+  }
+
+  // ---------- Session and pseudonyms ----------
+  function createSession() {
+    return { fwd: new Map(), rev: new Map(), counters: Object.create(null) };
+  }
+
+  function aliasFor(session, type, value, used) {
+    const key = type + '\u0000' + value;
+    let a = session.fwd.get(key);
+    if (a) return a;
+    let n = session.counters[type] || 0;
+    do { n++; a = type + '_' + n; } while (session.rev.has(a) || (used && used.has(a)));
+    session.counters[type] = n;
+    session.fwd.set(key, a);
+    session.rev.set(a, { original: value, type });
+    return a;
+  }
+
+  function exportMap(session) {
+    const entries = [];
+    for (const [alias, v] of session.rev) entries.push({ alias, original: v.original, type: v.type });
+    return { tool: 'log-sanitizer', version: 1, entries };
+  }
+
+  function partialMask(value, type) {
+    const v = type === 'CARD' ? value.replace(/\D/g, '') : value;
+    if (v.length <= 4) return '****';
+    return '*'.repeat(v.length - 4) + v.slice(-4);
+  }
+
+  // ---------- Overlap resolution ----------
+  // Priority first (lower wins), then length (longer wins), then position.
+  function resolve(matches, length) {
+    matches.sort((a, b) => (a.pri - b.pri) || ((b.e - b.s) - (a.e - a.s)) || (a.s - b.s));
+    const cov = new Uint8Array(length);
+    const accepted = [];
+    for (const m of matches) {
+      let clash = false;
+      for (let i = m.s; i < m.e; i++) if (cov[i]) { clash = true; break; }
+      if (clash) continue;
+      cov.fill(1, m.s, m.e);
+      accepted.push(m);
+    }
+    accepted.sort((a, b) => a.s - b.s);
+    return accepted;
+  }
+
+  function normalizeOpts(opts) {
+    opts = opts || {};
+    return {
+      types: Object.assign({}, DEFAULT_TYPES, opts.types || {}),
+      mode: opts.mode || 'type',
+      skipPrivate: !!opts.skipPrivate,
+      whitelist: (opts.whitelist || []).map((s) => String(s).trim()).filter(Boolean),
+      custom: opts.custom || []
+    };
+  }
+
+  // ---------- Main function: single pass ----------
+  function sanitize(text, opts, session) {
+    const o = normalizeOpts(opts);
+    session = session || createSession();
+    const wl = new Set(o.whitelist);
+    const matches = [];
+    for (const d of DETECTORS) {
+      if (!o.types[d.id]) continue;
+      d.find(text, o, (s, e, type) => {
+        if (e <= s) return;
+        const v = text.slice(s, e);
+        if (LABEL_RE.test(v)) return;
+        matches.push({ s, e, type, pri: d.pri, keep: wl.has(v) });
+      });
+    }
+    const accepted = resolve(matches, text.length);
+    const used = o.mode === 'pseudonyms' ? new Set(text.match(ALIAS_TOKEN_RE) || []) : null;
+
+    const parts = [];
+    const segments = [];
+    const counts = Object.create(null);
+    let pos = 0, outLen = 0, total = 0;
+    for (const m of accepted) {
+      if (m.s > pos) { const chunk = text.slice(pos, m.s); parts.push(chunk); outLen += chunk.length; }
+      const orig = text.slice(m.s, m.e);
+      let rep;
+      if (m.keep) rep = orig;
+      else {
+        if (o.mode === 'pseudonyms') rep = aliasFor(session, m.type, orig, used);
+        else if (o.mode === 'partial') rep = PARTIAL_TYPES.has(m.type) ? partialMask(orig, m.type) : '[' + m.type + ']';
+        else if (o.mode === 'remove') rep = '[REDACTED]';
+        else rep = '[' + m.type + ']';
+        counts[m.type] = (counts[m.type] || 0) + 1;
+        total++;
+        segments.push({ s: outLen, e: outLen + rep.length, type: m.type });
+      }
+      parts.push(rep); outLen += rep.length;
+      pos = m.e;
+    }
+    if (pos < text.length) parts.push(text.slice(pos));
+    return { text: parts.join(''), counts, total, segments };
+  }
+
+  // ---------- Restore ----------
+  function parseMap(map) {
+    if (typeof map === 'string') {
+      try { map = JSON.parse(map); } catch (e) { throw new Error('Mapping is not valid JSON'); }
+    }
+    if (!map || !Array.isArray(map.entries)) throw new Error('Mapping has no entries list');
+    const rev = new Map();
+    for (const en of map.entries) {
+      if (en && typeof en.alias === 'string' && typeof en.original === 'string' && en.alias) rev.set(en.alias, en.original);
+    }
+    return rev;
+  }
+
+  // Substitute from the longest aliases to the shortest, in one pass.
+  function restore(text, map) {
+    const rev = map instanceof Map ? map : parseMap(map);
+    if (!rev.size) return text;
+    const aliases = Array.from(rev.keys()).sort((a, b) => b.length - a.length);
+    const re = new RegExp(aliases.map(escapeRe).join('|'), 'g');
+    return text.replace(re, (a) => rev.get(a));
+  }
+
+  return { sanitize, restore, createSession, exportMap, parseMap, buildCustom, luhnOk, ibanOk,
+           resolve, DEFAULT_TYPES, DETECTORS, LABEL_RE };
+})();
+/* === LOGIC:END === */
+
+/* === UI:START === */
+EMBEDS.logsan = function (host) {
+  host.append(document.getElementById("tpl-logsan").content.cloneNode(true));
+  const $ = (id) => host.querySelector('[data-r="' + id + '"]');
+  const SETTINGS_KEY = 'logSanitizer.settings.v1';
+
+
+  const TYPE_LABELS = [
+    ['email', 'E-mail'], ['ipv4', 'IPv4'], ['ipv6', 'IPv6'], ['mac', 'MAC addresses'],
+    ['jwt', 'JWT'], ['keys', 'Cloud and service keys'],
+    ['authhdr', 'Authorization headers and cookies'], ['kv', 'key=value pairs and JSON fields'],
+    ['urlcreds', 'Credentials in URLs'], ['privkey', 'Private key blocks'],
+    ['card', 'Bank cards (Luhn)'], ['iban', 'IBAN (mod 97)'], ['phone', 'Phones (+...)'],
+    ['hosts', 'Internal hosts and FQDNs (optional)'], ['uuid', 'UUID (optional)'],
+    ['usernames', 'Usernames (optional)'], ['custom', 'Custom words and regexes (optional)']
+  ];
+  const MODES = [
+    ['type', 'Type: [EMAIL]'], ['pseudonyms', 'Pseudonyms: EMAIL_1'],
+    ['partial', 'Partial mask: ****1234'], ['remove', 'Removal: [REDACTED]']
+  ];
+  const COUNT_LABELS = {
+    EMAIL: 'E-mail', IPV4: 'IPv4', IPV6: 'IPv6', MAC: 'MAC', CARD: 'Cards', IBAN: 'IBAN',
+    PHONE: 'Phones', HOST: 'Hosts', UUID: 'UUID', USER: 'Users', CUSTOM: 'Custom'
+  };
+  const SECRET_TYPES = new Set(['JWT', 'KEY', 'SECRET', 'PRIVATE_KEY']);
+
+  const defaults = () => ({
+    types: Object.assign({}, LS.DEFAULT_TYPES), mode: 'type', skipPrivate: false,
+    autopaste: true, highlight: false
+  });
+  let settings = defaults();
+  let session = LS.createSession();
+  let lastOutput = '';
+  let debounceTimer = null;
+
+  function loadSettings() {
+    try {
+      const raw = localStorage.getItem(SETTINGS_KEY);
+      if (!raw) return;
+      const s = JSON.parse(raw);
+      const d = defaults();
+      if (s && typeof s === 'object') {
+        if (s.types && typeof s.types === 'object') for (const k of Object.keys(d.types)) if (typeof s.types[k] === 'boolean') d.types[k] = s.types[k];
+        if (MODES.some((m) => m[0] === s.mode)) d.mode = s.mode;
+        for (const k of ['skipPrivate', 'autopaste', 'highlight']) if (typeof s[k] === 'boolean') d[k] = s[k];
+        settings = d;
+      }
+    } catch (e) { /* localStorage unavailable: fall back to defaults */ }
+  }
+  function saveSettings() {
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { /* ignore */ }
+  }
+
+  // ---- settings UI ----
+  const typeBoxes = $('type-boxes');
+  for (const [id, label] of TYPE_LABELS) {
+    const l = document.createElement('label');
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.dataset.type = id;
+    l.append(cb, document.createTextNode(label));
+    typeBoxes.appendChild(l);
+  }
+  const modeBox = $('mode-radios');
+  for (const [id, label] of MODES) {
+    const l = document.createElement('label');
+    const r = document.createElement('input');
+    r.type = 'radio'; r.name = 'mode'; r.value = id;
+    l.append(r, document.createTextNode(label));
+    modeBox.appendChild(l);
+  }
+
+  function applySettingsToUI() {
+    for (const cb of typeBoxes.querySelectorAll('input')) cb.checked = !!settings.types[cb.dataset.type];
+    for (const r of modeBox.querySelectorAll('input')) r.checked = r.value === settings.mode;
+    $('opt-skip-private').checked = settings.skipPrivate;
+    $('opt-autopaste').checked = settings.autopaste;
+    $('opt-highlight').checked = settings.highlight;
+  }
+
+  function lines(id) { return $(id).value.split(/\r?\n/); }
+
+  function setStatus(msg) { $('status').textContent = msg || ''; }
+
+  // ---- processing ----
+  function run() {
+    const text = $('input').value;
+    const t0 = performance.now();
+    const opts = {
+      types: settings.types, mode: settings.mode, skipPrivate: settings.skipPrivate,
+      whitelist: lines('whitelist'), custom: lines('custom')
+    };
+    const errBox = $('custom-error');
+    if (settings.types.custom) {
+      const errs = LS.buildCustom(opts.custom).errors;
+      errBox.hidden = !errs.length;
+      errBox.textContent = errs.length ? 'Invalid regex skipped: ' + errs.join('; ') : '';
+    } else errBox.hidden = true;
+
+    const res = LS.sanitize(text, opts, session);
+    lastOutput = res.text;
+    renderOutput(res);
+    renderStats(res);
+    updateMapInfo();
+    setStatus(text ? 'Done in ' + Math.round(performance.now() - t0) + ' ms' : '');
+  }
+
+  function renderOutput(res) {
+    const ta = $('output'), view = $('output-view'), note = $('highlight-note');
+    const canHighlight = settings.highlight && res.text.length <= 1000000 && res.segments.length <= 5000;
+    note.hidden = !(settings.highlight && !canHighlight);
+    if (note.hidden === false) note.textContent = 'Highlighting disabled: the result is too large. Showing plain text.';
+    if (!canHighlight) { view.hidden = true; ta.hidden = false; ta.value = res.text; return; }
+    ta.hidden = true; view.hidden = false;
+    view.textContent = '';
+    const frag = document.createDocumentFragment();
+    let pos = 0;
+    for (const seg of res.segments) {
+      if (seg.s > pos) frag.appendChild(document.createTextNode(res.text.slice(pos, seg.s)));
+      const mk = document.createElement('mark');
+      if (SECRET_TYPES.has(seg.type)) mk.className = 'secret';
+      mk.title = seg.type;
+      mk.textContent = res.text.slice(seg.s, seg.e);
+      frag.appendChild(mk);
+      pos = seg.e;
+    }
+    if (pos < res.text.length) frag.appendChild(document.createTextNode(res.text.slice(pos)));
+    view.appendChild(frag);
+  }
+
+  function renderStats(res) {
+    const box = $('stats');
+    box.textContent = '';
+    if (!res.total) { box.textContent = $('input').value ? 'Nothing found.' : ''; return; }
+    const agg = Object.create(null);
+    for (const [t, n] of Object.entries(res.counts)) {
+      const key = SECRET_TYPES.has(t) ? 'Secrets' : (COUNT_LABELS[t] || t);
+      agg[key] = (agg[key] || 0) + n;
+    }
+    box.append(document.createTextNode(Object.entries(agg).map(([k, n]) => k + ': ' + n).join(', ') + '. Total: '));
+    const s = document.createElement('strong');
+    s.textContent = String(res.total);
+    box.appendChild(s);
+  }
+
+  function updateMapInfo() {
+    const n = session.rev.size;
+    $('map-info').textContent = n
+      ? 'Mapping entries: ' + n + '. Kept only in page memory.'
+      : 'The mapping is filled in "Pseudonyms" mode and kept only in page memory.';
+  }
+
+  function schedule(immediate) {
+    clearTimeout(debounceTimer);
+    if (!settings.autopaste) return;
+    if (immediate) run();
+    else debounceTimer = setTimeout(run, 250);
+  }
+
+  // ---- helpers ----
+  function download(name, content, type) {
+    const url = URL.createObjectURL(new Blob([content], { type }));
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function copyText(text, statusEl) {
+    try {
+      await navigator.clipboard.writeText(text);
+      statusEl.textContent = 'Copied';
+    } catch (e) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); ta.remove();
+        statusEl.textContent = 'Copied';
+      } catch (e2) { statusEl.textContent = 'Copy failed'; }
+    }
+  }
+
+  // Fictional data. Prefixes are concatenated so secret scanners do not mistake the demo for a leak.
+  function sampleText() {
+    const nl = '\n';
+    const key = '-----BEGIN ' + 'PRIVATE KEY-----' + nl +
+      'MIIFAKEFAKEFAKEFAKEFAKEFAKEFAKEFAKEFAKEFAKEFAKE0000' + nl +
+      'FAKEFAKEFAKEFAKEFAKEFAKEFAKEFAKEFAKEFAKEFAKEFAKE1111' + nl +
+      '-----END ' + 'PRIVATE KEY-----';
+    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+    return [
+      '2025-03-14 10:21:07 INFO  app v1.2.3.4 started on host app01.corp.example.com',
+      '2025-03-14 10:21:08 INFO  login ok user=alice.demo email=alice.demo@example.com from 203.0.113.42',
+      '2025-03-14 10:21:09 WARN  Failed password for bob from 198.51.100.7 port 51022 ssh2',
+      '2025-03-14 10:21:10 DEBUG request id=3f2504e0-4f89-11d3-9a0c-0305e82c3301 ip=192.0.2.15 ipv6=2001:db8::8a2e:370:7334 mac=00:1B:44:11:3A:B7',
+      '2025-03-14 10:21:11 DEBUG Authorization: Bearer ' + jwt,
+      '2025-03-14 10:21:11 DEBUG X-Api-Key: demo-api-key-0000-1111-2222',
+      '2025-03-14 10:21:12 DEBUG Cookie: sessionid=abc123def456; theme=dark',
+      '2025-03-14 10:21:13 INFO  config {"db_password": "hunter2-demo", "api_key": "demo-key-12345678", "region": "eu-1"}',
+      '2025-03-14 10:21:14 INFO  connecting postgres://dbadmin:Sup3rDemoPass@db.internal:5432/app',
+      '2025-03-14 10:21:15 INFO  aws key AKIAIOSFODNN7EXAMPLE',
+      '2025-03-14 10:21:15 INFO  github ' + 'gh' + 'p_' + '0123456789abcdefghijklmnopqrstuvwxyz',
+      '2025-03-14 10:21:15 INFO  slack ' + 'xo' + 'xb-' + '123456789012-1234567890123-abcdefghijklmnopqrstuvwx',
+      '2025-03-14 10:21:15 INFO  stripe ' + 'sk_' + 'live_' + 'EXAMPLEEXAMPLE1234567890',
+      '2025-03-14 10:21:15 INFO  google ' + 'AI' + 'zaSyA-1234567890abcdefghijklmnopqrstu',
+      '2025-03-14 10:21:16 INFO  payment card 4111 1111 1111 1111 iban GB82 WEST 1234 5698 7654 32',
+      '2025-03-14 10:21:17 INFO  callback phone +1 (202) 555-0143, order 1234567890, build 2025-03-14',
+      '2025-03-14 10:21:18 INFO  same user again: alice.demo@example.com from 203.0.113.42',
+      key
+    ].join(nl) + nl;
+  }
+
+  // ---- events ----
+  $('input').addEventListener('input', () => schedule(false));
+  $('input').addEventListener('paste', () => { if (settings.autopaste) setTimeout(() => schedule(true), 0); });
+  $('btn-run').addEventListener('click', run);
+  $('whitelist').addEventListener('input', () => schedule(false));
+  $('custom').addEventListener('input', () => schedule(false));
+
+  typeBoxes.addEventListener('change', (e) => {
+    const t = e.target.dataset && e.target.dataset.type;
+    if (!t) return;
+    settings.types[t] = e.target.checked; saveSettings(); schedule(true);
+  });
+  modeBox.addEventListener('change', (e) => {
+    if (e.target.name !== 'mode') return;
+    settings.mode = e.target.value; saveSettings(); schedule(true);
+  });
+  $('opt-skip-private').addEventListener('change', (e) => { settings.skipPrivate = e.target.checked; saveSettings(); schedule(true); });
+  $('opt-autopaste').addEventListener('change', (e) => { settings.autopaste = e.target.checked; saveSettings(); if (settings.autopaste) schedule(true); });
+  $('opt-highlight').addEventListener('change', (e) => { settings.highlight = e.target.checked; saveSettings(); if ($('input').value) run(); });
+
+  $('btn-clear').addEventListener('click', () => {
+    clearTimeout(debounceTimer);
+    $('input').value = ''; $('output').value = ''; $('output-view').textContent = '';
+    $('output-view').hidden = true; $('output').hidden = false; $('highlight-note').hidden = true;
+    lastOutput = ''; session = LS.createSession();
+    $('stats').textContent = ''; updateMapInfo(); setStatus('Text and session mapping cleared');
+  });
+  $('btn-copy').addEventListener('click', () => copyText(lastOutput, $('status')));
+  $('btn-txt').addEventListener('click', () => download('sanitized.txt', lastOutput, 'text/plain;charset=utf-8'));
+  $('btn-sample').addEventListener('click', () => { $('input').value = sampleText(); run(); });
+  $('btn-reset').addEventListener('click', () => {
+    settings = defaults(); applySettingsToUI(); saveSettings(); schedule(true); setStatus('Settings reset');
+  });
+  $('btn-map').addEventListener('click', () => {
+    if (!session.rev.size) { setStatus('Mapping is empty: choose "Pseudonyms" mode and process some text'); return; }
+    download('log-sanitizer-map.json', JSON.stringify(LS.exportMap(session), null, 2), 'application/json');
+  });
+
+  // tabs
+  function showTab(which) {
+    const clean = which === 'clean';
+    $('view-clean').hidden = !clean; $('view-restore').hidden = clean;
+    $('tab-clean').setAttribute('aria-selected', String(clean));
+    $('tab-restore').setAttribute('aria-selected', String(!clean));
+  }
+  $('tab-clean').addEventListener('click', () => showTab('clean'));
+  $('tab-restore').addEventListener('click', () => showTab('restore'));
+
+  // restore
+  $('r-file').addEventListener('change', (e) => {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    const fr = new FileReader();
+    fr.onload = () => { $('r-map').value = String(fr.result); $('r-status').textContent = 'Mapping loaded'; };
+    fr.onerror = () => { $('r-status').textContent = 'Could not read the file'; };
+    fr.readAsText(f);
+    e.target.value = '';
+  });
+  $('r-run').addEventListener('click', () => {
+    const err = $('r-error');
+    err.hidden = true;
+    try {
+      const mapText = $('r-map').value.trim();
+      const map = mapText ? mapText : LS.exportMap(session);
+      $('r-output').value = LS.restore($('r-input').value, map);
+      $('r-status').textContent = mapText ? 'Done' : 'Done (used the current session mapping)';
+    } catch (e) {
+      err.textContent = e.message; err.hidden = false; $('r-status').textContent = '';
+    }
+  });
+  $('r-copy').addEventListener('click', () => copyText($('r-output').value, $('r-status')));
+
+  loadSettings();
+  applySettingsToUI();
+  updateMapInfo();
+};
+/* === UI:END === */
+</script>
+
+<script>
+/* =====================================================================
+   EMBEDDED IMAGES (base64). Referenced from projects as src: "asset:NAME".
+   Nothing to edit here; to add an image, add a line with its data URI.
+   ===================================================================== */
+window.ASSETS = {
+  tom1: "data:image/png;base64,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",
+  tom2: "data:image/png;base64,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",
+};
+</script>
+</body>
+</html>
