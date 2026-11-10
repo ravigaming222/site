@@ -4,8 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ravan Ibrahimli — Portfolio</title>
-<meta name="description" content="Portfolio: software, hardware and games.">
+<meta name="description" content="Ravan Ibrahimli — software, security tools and games.">
 <meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0b0a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ravan Ibrahimli — Portfolio">
+<meta property="og:description" content="Aspiring cybersecurity specialist from Baku. Software, security tools and games.">
+<meta property="og:url" content="https://ravanibrahimli.com/">
+<meta property="og:image" content="https://ravanibrahimli.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ravanibrahimli.com/og.png">
+
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+CiAgPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMDAiIGZpbGw9IiMxMTExMTEiIC8+CiAgPHBhdGggZD0iTTEyMCAxNjAgTDI0MCAyNTYgTDEyMCAzNTIiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0OCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIiAvPgogIDxyZWN0IHg9IjI4MCIgeT0iMzEwIiB3aWR0aD0iMTEyIiBoZWlnaHQ9IjQyIiByeD0iOCIgZmlsbD0iI2ZmZmZmZiIgLz4KPC9zdmc+">
 <link rel="icon" type="image/png" sizes="64x64" href="data:image/png;base64,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">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +42,7 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html { scroll-padding-top: 72px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
     background: var(--bg);
     color: var(--text);
@@ -49,7 +60,7 @@
   .mono { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
 
   /* ---------- top bar ---------- */
-  .top { border-bottom: 1px solid var(--line); }
+  .top { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--line); background: rgba(11,11,10,.88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
   .top .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
   .top nav { display: flex; gap: 28px; }
   .top nav a { color: var(--muted); transition: color .15s; }
@@ -552,7 +563,7 @@ const SITE = {
   // ---------- About ----------
   name:    ["Ravan", "Ibrahimli"],    // two words: the second one is italic. For a single word use ["Nickname"]
   navName: "Ravan Ibrahimli",
-  bio:     "Computer enthusiast and future cybersecurity specialist. I write software, tinker with microcontrollers and make the occasional game.",
+  bio:     "Aspiring cybersecurity specialist from Baku. I build software and security tools, and develop games in my free time.",
 
   meta: [
     { label: "Status",   value: "Currently working on a game", live: true },        // live:true — shows the indicator dot
